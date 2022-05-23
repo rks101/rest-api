@@ -1,0 +1,30 @@
+// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+
+import prisma from 'lib/prisma'
+
+export default async function handler(req, res) {
+  if (req.method === 'GET') {
+    
+    const expense = await prisma.expense.findUnique({
+      where : {
+        id : parseInt(req.query.id)
+      }
+    })
+
+    if (!expense) {
+
+      return res.status(404).json({message : 'Expense not found'})
+    }
+    
+    res.status(200).json(expense)
+  }
+
+  if (req.method === 'PUT') {
+    
+  }
+
+  if (req.method === 'DELETE') {
+    
+  }
+
+}
